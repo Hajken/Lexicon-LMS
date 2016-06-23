@@ -16,6 +16,19 @@ namespace Lexicon_LMS.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string FullName { get { return FirstName + "" + LastName; } }
+       
+
+        public string PersonNumber { get; set; }
+
+        public int CourseId { get; set; }
+
+        public virtual ICollection<Course> Courses { get; set; }
+
+
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
