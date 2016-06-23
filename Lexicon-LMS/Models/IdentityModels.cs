@@ -25,7 +25,7 @@ namespace Lexicon_LMS.Models
 
         public string PersonNumber { get; set; }
 
-        public int CourseId { get; set; }
+        public int? CourseId { get; set; }
 
         public virtual Course Course { get; set; }
 
