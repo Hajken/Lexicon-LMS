@@ -22,3 +22,14 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.sidebar{
+    float:right;
+    margin: 65px 25px 0px 0px;
+    padding:10px;
+    border:solid 5px black;
+    width:200px;
+
+}
+
+
