@@ -17,21 +17,59 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                
+                <a href="@Url.Action("Index", "Home")" class="navbar-brand">
+
+                    <img src="~/images/logo.jpg" />
+                </a>
+              @*  @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Module", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Students", "About", "Home")</li>
+                    <li>@Html.ActionLink("Document", "Contact", "Home")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
+    <div class="sidebar">
+        <div >
+            <h2>Deadline</h2>
+            <p>sds</p>
+            <p>sds</p>
+            <p>sds</p>
+            <p>sds</p>
+            <p>sds</p>
+            <p>sds</p>
+            <p>sds</p>
+            <p>sds</p>
+            <p>sds</p>
+        </div>
+        <hr size="30" />
+        <div >
+            <h2>Deliver</h2>
+            <p>sds</p>
+            <p>sds</p>
+            <p>sds</p>
+            <p>sds</p>
+            <p>sds</p>
+            <p>sds</p>
+            <p>sds</p>
+            <p>sds</p>
+            <p>sds</p>
+            <p>sds</p>
+        </div>
+    </div>
     <div class="container body-content">
         @RenderBody()
         <hr />
+       
+          
+            
+       
+
         <footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
