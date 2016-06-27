@@ -11,7 +11,7 @@ namespace Lexicon_LMS.Models
         public int ActivityId { get; set; }
         public string Description { get; set; }
         public string Name { get; set; }
-        public DateTime StartTime { get; set; }
+        public DateTime StartDate { get; set; }
         public DateTime Deadline { get; set; }
         public int ActivityTypeId { get; set; }
         public int ModuleId { get; set; }
