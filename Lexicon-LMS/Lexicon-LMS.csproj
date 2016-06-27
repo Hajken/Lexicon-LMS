@@ -186,6 +186,18 @@
     <Compile Include="Migrations\201606231421159_AddedSeed.Designer.cs">
       <DependentUpon>201606231421159_AddedSeed.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606270819163_addedSeedDocument.cs" />
+    <Compile Include="Migrations\201606270819163_addedSeedDocument.Designer.cs">
+      <DependentUpon>201606270819163_addedSeedDocument.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606270847055_changedseedAndDb.cs" />
+    <Compile Include="Migrations\201606270847055_changedseedAndDb.Designer.cs">
+      <DependentUpon>201606270847055_changedseedAndDb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606270903505_changedIdentityIcoll.cs" />
+    <Compile Include="Migrations\201606270903505_changedIdentityIcoll.Designer.cs">
+      <DependentUpon>201606270903505_changedIdentityIcoll.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Activity.cs" />
@@ -279,6 +291,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201606231421159_AddedSeed.resx">
       <DependentUpon>201606231421159_AddedSeed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606270819163_addedSeedDocument.resx">
+      <DependentUpon>201606270819163_addedSeedDocument.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606270847055_changedseedAndDb.resx">
+      <DependentUpon>201606270847055_changedseedAndDb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606270903505_changedIdentityIcoll.resx">
+      <DependentUpon>201606270903505_changedIdentityIcoll.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

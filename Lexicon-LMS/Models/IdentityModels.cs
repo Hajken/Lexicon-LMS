@@ -28,6 +28,7 @@ namespace Lexicon_LMS.Models
         public int? CourseId { get; set; }
 
         public virtual Course Course { get; set; }
+        public virtual ICollection<Document> Documents { get; set; }
 
 
     }
@@ -43,7 +44,7 @@ namespace Lexicon_LMS.Models
         public DbSet<Activity> Activities { get; set; }
         public DbSet<Module> Modules { get; set; }
         public DbSet<ActivityType> ActivityTypes { get; set; }
-        //public DbSet<Document> Documents { get; set; }
+        public DbSet<Document> Documents { get; set; }
 
         public static ApplicationDbContext Create()
         {

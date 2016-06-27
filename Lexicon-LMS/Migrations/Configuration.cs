@@ -35,7 +35,12 @@ namespace Lexicon_LMS.Migrations
                 new Activity { Name = "Övning 16", Description = "Övning 16 MVC", StartDate = new DateTime(2016, 3, 19), Deadline = new DateTime(2016, 3, 20), ModuleId = 2, ActivityTypeId = 2 },
                 new Activity { Name = "Föreläsning MVC", Description = "MVC 5 föreläsning med Adrian", StartDate = new DateTime(2016, 3, 21), Deadline = new DateTime(2016, 3, 21), ModuleId = 2, ActivityTypeId = 3 },
                 new Activity { Name = "Inlämningsuppgift 11", Description = "Inlämningsuppgift 11", StartDate = new DateTime(2016, 3, 22), Deadline = new DateTime(2016, 3, 25), ModuleId = 2, ActivityTypeId = 4 },
-                new Activity { Name = "Föreläsning JavaScript", Description = "Föreläsning JavaScript med Adrian", StartDate = new DateTime(2016, 3, 14), Deadline = new DateTime(2016, 3, 15), ModuleId = 3, ActivityTypeId = 3 });
+                new Activity { Name = "Föreläsning JavaScript", Description = "Föreläsning JavaScript med Adrian", StartDate = new DateTime(2016, 3, 14), Deadline = new DateTime(2016, 3, 15), ModuleId = 3, ActivityTypeId = 3 },
+                new Activity { Name = "Inlämningsuppgift 12", Description = "Inlämningsuppgift 12", StartDate = new DateTime(2016, 7, 1), Deadline = new DateTime(2016, 7, 12), ModuleId = 2, ActivityTypeId = 4 }
+                );
+            context.SaveChanges();
+            context.Documents.AddOrUpdate(d => d.DocumentId,
+                new Document { FileName = "Övning11_Helen", Description = "Helens inlämningsuppgift 11", CourseId = 1, ModuleId = 2, UserId = "071ebae0-2d61-4bd3-ba6a-7286326b5c83", Path = "c:/Documents", Created = new DateTime(2016, 6, 12), ActivityId = 5 });
             context.SaveChanges();
 
         }

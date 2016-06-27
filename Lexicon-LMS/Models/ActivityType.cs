@@ -9,6 +9,6 @@ namespace Lexicon_LMS.Models
     {
         public int ActivityTypeId { get; set; }
         public string Name { get; set; }
-        public virtual ICollection<Activity> Activity { get; set; }
+        public virtual ICollection<Activity> Activities { get; set; }
     }
 }
