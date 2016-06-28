@@ -1,8 +1,27 @@
-﻿<section class="panel well">
-    <header class="panel-heading">
-        Nyheter
-    </header>
-    <div class="panel-body" id="noti-box">
-        @*foreach*@sdsdasd
-    </div>
-</section>
+﻿@model IEnumerable<Lexicon_LMS.Models.Activity>
+    <h4>Kommande inlämningar</h4>
+            @foreach (var item in Model)
+            {
+                if (item.ActivityType.Name == "Inlämningsuppgift"&& DateTime.Now.CompareTo(item.Deadline)<0)
+                {
+                    <div class="well">
+                        @Html.DisplayFor(modelItem => item.ActivityType.Name)
+                        @Html.DisplayFor(modelItem => item.Deadline)
+                    </div>
+                }
+
+            }
+<h4>Gamla Inlämningar</h4>
+@foreach (var item in Model)
+{
+    if (item.ActivityType.Name == "Inlämningsuppgift" && DateTime.Now.CompareTo(item.Deadline) >0)
+    {
+        <div class="well">
+            @Html.DisplayFor(modelItem => item.ActivityType.Name)
+            @Html.DisplayFor(modelItem => item.Deadline)
+        </div>
+    }
+
+}
+
+

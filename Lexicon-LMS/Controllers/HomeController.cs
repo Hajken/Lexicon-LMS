@@ -8,6 +8,7 @@ using Lexicon_LMS.Models;
 
 namespace Lexicon_LMS.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -15,7 +16,24 @@ namespace Lexicon_LMS.Controllers
         public ActionResult Index()
         {
             var activities = db.Activities.Include(a => a.ActivityType).Include(a => a.Module);
-            return View(activities.ToList());
+            List<Activity> SortedList = activities.ToList().OrderBy(o => o.StartDate).ToList();
+            return View(SortedList);
+        }
+
+        public ActionResult GetExerciseToSubmit()
+        {
+            if (Request.IsAjaxRequest())
+            {
+                var activities = db.Activities.Include(a => a.ActivityType).Include(a => a.Module);
+
+                if (activities == null)
+                {
+                    ViewBag.Message = "Did not find your any item!";
+                }
+                return PartialView("_RightMenuBar", activities.ToList());
+
+            }
+            return RedirectToAction("Index");
         }
         public ActionResult Documents()
         {
