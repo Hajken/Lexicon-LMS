@@ -10,7 +10,7 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
-    <tr>
+    <tr class="success">
         <th>
             @Html.DisplayNameFor(model => model.ActivityType.Name)
         </th>
@@ -33,7 +33,7 @@
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
+    <tr >
         <td>
             @Html.DisplayFor(modelItem => item.ActivityType.Name)
         </td>

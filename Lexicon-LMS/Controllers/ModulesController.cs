@@ -18,6 +18,7 @@ namespace Lexicon_LMS.Controllers
         public ActionResult Index()
         {
             var modules = db.Modules.Include(m => m.Course);
+           
             return View(modules.ToList());
         }
 
@@ -29,6 +30,21 @@ namespace Lexicon_LMS.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Module module = db.Modules.Find(id);
+            if (module == null)
+            {
+                return HttpNotFound();
+            }
+            return View(module);
+        }
+        // GET: Modules/ModuleDetails/5
+        public ActionResult ModuleDocuments(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Module module = db.Modules.Find(id);
+            //Document documents = db.Documents.Find(id);
             if (module == null)
             {
                 return HttpNotFound();

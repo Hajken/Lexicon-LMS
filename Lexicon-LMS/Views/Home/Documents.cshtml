@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Lexicon_LMS.Models.Document>
+
+@{
+    ViewBag.Title = "Documents";
+}
+
+<h2>Documents</h2>
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+<table class="table table-bordered table-hover" >
+    <tr class="success">
+        @*<th>
+            @Html.DisplayNameFor(model => model.Activity.Description)
+        </th>*@
+        @*<th>
+            @Html.DisplayNameFor(model => model.Course.Name)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Module.Name)
+        </th>
+        <th>
+           
+          @Html.DisplayNameFor(model => model.User.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FileName)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.Path)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Created)
+        </th>
+        @*<th></th>*@
+    </tr>
+
+@foreach (var item in Model) {
+    <tr class="success">
+        @*<td>
+            @Html.DisplayFor(modelItem => item.Activity.Description)
+        </td>*@
+        @*<td>
+            @Html.DisplayFor(modelItem => item.Course.Name)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.Module.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FileName)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.Path)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Created)
+        </td>
+        @*<td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.DocumentId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.DocumentId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.DocumentId })
+        </td>*@
+    </tr>
+}
+
+</table>

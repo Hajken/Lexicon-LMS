@@ -17,7 +17,11 @@ namespace Lexicon_LMS.Controllers
             var activities = db.Activities.Include(a => a.ActivityType).Include(a => a.Module);
             return View(activities.ToList());
         }
-
+        public ActionResult Documents()
+        {
+            
+            return View(db.Documents.ToList());
+        }
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

@@ -49,6 +49,7 @@ namespace Lexicon_LMS.Migrations
             //   new ApplicationUser { Email = "Pupil@hotmail.com", FirstName = "Johan", LastName = "Haak", UserName = "pupil@hotmail.com", PasswordHash = password });
 
             //context.SaveChanges();
+
             if (!context.Roles.Any(r => r.Name == "Pupil"))
             {
                 var store = new RoleStore<IdentityRole>(context);

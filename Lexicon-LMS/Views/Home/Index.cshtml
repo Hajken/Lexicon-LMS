@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<Lexicon_LMS.Models.Activity>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Schedule";
 }
-<h2>@ViewBag.Title.</h2>
-<table class="table table-hover">
-    <tr>
+<h2>@ViewBag.Title</h2>
+<table class="table table-bordered table-hover">
+    <tr class="success">
         <th>
             @Html.DisplayNameFor(model => model.ActivityType.Name)
         </th>
@@ -26,7 +26,7 @@
 
     @foreach (var item in Model)
     {
-        <tr>
+        <tr class="success">
             <td>
                 @Html.DisplayFor(modelItem => item.ActivityType.Name)
             </td>

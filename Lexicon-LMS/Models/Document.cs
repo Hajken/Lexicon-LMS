@@ -10,12 +10,13 @@ namespace Lexicon_LMS.Models
     public class Document
     {
         public int DocumentId { get; set; }
+        [Display(Name = "File Name")]
         public string FileName { get; set; }
         public string Path { get; set; }
         public string Description { get; set; }
         public DateTime Created { get; set; }
 
-
+        
         public string UserId { get; set; }
         public int? ActivityId { get; set; }
         public int? CourseId { get; set; }
