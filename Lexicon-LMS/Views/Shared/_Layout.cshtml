@@ -9,7 +9,7 @@
     @*<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>*@
-
+    
 </head>
 <body>
     <nav class="navbar navbar-inverse">
@@ -29,7 +29,8 @@
                     <li>@Html.ActionLink("Students", "About", "Home")</li>
                     <li>@Html.ActionLink("Document", "Contact", "Home")</li>
                 </ul>
-                @Html.Partial("_LoginPartial")
+                
+
             </div>
         </div>
     </nav>
@@ -41,55 +42,40 @@
                 <p><a href="#">Link</a></p>
                 <p><a href="#">Link</a></p>
             </div>
-            <div class="col-sm-8 text-left">
+            <div class="col-md-8">
                 @RenderBody()
-        </div>
-            <div class="col-sm-2 sidenav">
-                <div class="well">
-                    <p>ADS</p>
-    </div>
-                <div class="well">
-                    <p>ADS</p>
-                </div>
-                <div class="well">
-                    <p>ADS</p>
-                </div>
-                <div class="well">
-                    <p>ADS</p>
-                </div>
-                <div class="well">
-                    <p>ADS</p>
-                </div>
-                <div class="well">
-                    <p>ADS</p>
-                </div>
-                <div class="well">
-                    <p>ADS</p>
-                </div>
-                <div class="well">
-                    <p>ADS</p>
-                </div>
-                <div class="well">
-                    <p>ADS</p>
-                </div><div class="well">
-    <p>ADS</p>
-</div><div class="well">
-    <p>ADS</p>
-</div><div class="well">
-    <p>ADS</p>
-</div>
-        </div>
+            </div>
+            <div id="rightsidebartop" class="col-sm-2 sidenav">
+
+            </div>
         </div>
     </div>
-          
-            
-       
+
+
+
 
     <footer class="container-fluid text-center">
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+    </footer>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    @* Längst ner för att den ska hinna hämta ajax filerna http://www.c-sharpcorner.com/UploadFile/d551d3/how-to-load-partial-views-in-Asp-Net-mvc-using-jquery-ajax/ *@
+    <script type="text/javascript">
+        $.ajax({
+            url: '/Home/GetExerciseToSubmit',
+            contentType: 'application/html; charset=utf-8',
+            type: 'Get',
+            dataType:'html'
+
+        })
+        .success(function(result) {
+                $('#rightsidebartop').html(result);
+        })
+        .error(function (xhr, status) {
+            alert(status);
+        })
+
+    </script>
 </body>
 </html>

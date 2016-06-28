@@ -18,6 +18,22 @@ namespace Lexicon_LMS.Controllers
             return View(activities.ToList());
         }
 
+        public ActionResult GetExerciseToSubmit()
+        {
+            if (Request.IsAjaxRequest())
+            {
+                var activities = db.Activities.Include(a => a.ActivityType).Include(a => a.Module);
+
+                if (activities == null)
+                {
+                    ViewBag.Message = "Did not find your any item!";
+                }
+                return PartialView("_RightMenuBar", activities.ToList());
+
+            }
+            return RedirectToAction("Index");
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
