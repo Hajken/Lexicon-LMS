@@ -62,7 +62,7 @@ namespace Lexicon_LMS.Migrations
             {
                 var store = new UserStore<ApplicationUser>(context);
                 var manager = new UserManager<ApplicationUser>(store);
-                var user = new ApplicationUser { UserName = "pupil@hotmail.com", Email = "Pupil@hotmail.com", FirstName = "Johan", LastName = "Haak" };
+                var user = new ApplicationUser { UserName = "pupil@hotmail.com", Email = "Pupil@hotmail.com", FirstName = "Johan", LastName = "Haak", PersonNumber = "921011-1212", PhoneNumber = "07056555563" };
 
                 manager.Create(user, "Demo!123");
                 manager.AddToRole(user.Id, "Pupil");
@@ -71,7 +71,7 @@ namespace Lexicon_LMS.Migrations
             {
                 var store = new UserStore<ApplicationUser>(context);
                 var manager = new UserManager<ApplicationUser>(store);
-                var user = new ApplicationUser { UserName = "helenmagnusson@hotmail.com", Email = "helenmagnusson@hotmail.com", FirstName = "Helen", LastName = "Magnusson" };
+                var user = new ApplicationUser { UserName = "helenmagnusson@hotmail.com", Email = "helenmagnusson@hotmail.com", FirstName = "Helen", LastName = "Magnusson", PersonNumber = "XXXXXX-XXXX", PhoneNumber = "07056555563" };
 
                 manager.Create(user, "Demo!123");
                 manager.AddToRole(user.Id, "Pupil");
@@ -89,7 +89,7 @@ namespace Lexicon_LMS.Migrations
             {
                 var store = new UserStore<ApplicationUser>(context);
                 var manager = new UserManager<ApplicationUser>(store);
-                var user = new ApplicationUser { UserName = "teacher@hotmail.com", Email = "teacher@hotmail.com", FirstName = "John", LastName = "Hellman" };
+                var user = new ApplicationUser { UserName = "teacher@hotmail.com", Email = "teacher@hotmail.com", FirstName = "John", LastName = "Hellman", PersonNumber = "XXXXXX-XXXX", PhoneNumber = "07056555563" };
 
                 manager.Create(user, "Demo!123");
                 manager.AddToRole(user.Id, "Teacher");
@@ -102,7 +102,7 @@ namespace Lexicon_LMS.Migrations
             if (!context.Documents.Any(d => d.FileName == "Övning12_Helen"))
             {
                 context.Documents.AddOrUpdate(d => d.FileName,
-                new Document { FileName = "Övning12_Helen", Description = "Helens inlämningsuppgift 12", ActivityId = 5, UserId = (context.Users.FirstOrDefault(u => u.UserName == "helenmagnusson@hotmail.com").Id), Path = "c:/Documents", Created = new DateTime(2016, 6, 27) });
+                new Document { FileName = "Övning12_Helen", Description = "Helens inlämningsuppgift 12", ActivityId = 7, UserId = (context.Users.FirstOrDefault(u => u.UserName == "helenmagnusson@hotmail.com").Id), Path = "c:/Documents", Created = new DateTime(2016, 6, 27) });
             }
             context.SaveChanges();
 

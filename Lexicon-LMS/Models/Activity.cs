@@ -5,6 +5,7 @@ using System.Web;
 
 namespace Lexicon_LMS.Models
 {
+
     public class Activity
     {
 

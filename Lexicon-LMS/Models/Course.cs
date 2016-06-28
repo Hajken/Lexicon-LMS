@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
 
 namespace Lexicon_LMS.Models
 {
+
     public class Course
     {
         public int CourseId { get; set; }
+        [DisplayName("CourseName")]
         public string Name { get; set; }
         public string Description { get; set; }
         public DateTime StartDate { get; set; }
