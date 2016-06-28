@@ -7,6 +7,7 @@ using System.Web;
 
 namespace Lexicon_LMS.Models
 {
+
     public class Document
     {
         public int DocumentId { get; set; }

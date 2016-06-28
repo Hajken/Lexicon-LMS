@@ -26,7 +26,7 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Module", "Index", "Modules")</li>
-                    <li>@Html.ActionLink("Students", "About", "Home")</li>
+                    <li>@Html.ActionLink("Students", "Index", "ApplicationUsers")</li>
                     <li>@Html.ActionLink("Document", "Documents", "Home")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
@@ -43,19 +43,19 @@
             </div>
             <div class="col-sm-8">
                 @RenderBody()
-            </div>
+        </div>
             <div id="rightsidebartop" class="col-sm-2 sidenav">
 
-            </div>
-        </div>
-    </div>
-
-
-
+                </div>
+                </div>
+                </div>
+          
+            
+       
 
     <footer class="container-fluid text-center">
-        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-    </footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
