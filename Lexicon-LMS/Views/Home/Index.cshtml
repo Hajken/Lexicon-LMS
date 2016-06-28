@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 <h2>@ViewBag.Title.</h2>
-<table class="table table-hover">
+<table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.ActivityType.Name)
@@ -29,29 +29,34 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ActivityType.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Module.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Deadline)
-            </td>
-            <td>
-                @Html.ActionLink("Details", "Details", new { id = item.ActivityId }) 
-            </td>
-        </tr>
+        if (item.ActivityType.Name == "Inlämningsuppgift" && DateTime.Now.CompareTo(item.Deadline) < 0)
+        {
+
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ActivityType.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Module.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Deadline)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new {id = item.ActivityId})
+                </td>
+            </tr>
+        }
     }
 
 </table>

@@ -15,7 +15,8 @@ namespace Lexicon_LMS.Controllers
         public ActionResult Index()
         {
             var activities = db.Activities.Include(a => a.ActivityType).Include(a => a.Module);
-            return View(activities.ToList());
+            List<Activity> SortedList = activities.ToList().OrderBy(o => o.StartDate).ToList();
+            return View(SortedList);
         }
 
         public ActionResult GetExerciseToSubmit()
