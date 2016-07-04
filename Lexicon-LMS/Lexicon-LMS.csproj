@@ -200,6 +200,10 @@
     <Compile Include="Migrations\201606270903505_changedIdentityIcoll.Designer.cs">
       <DependentUpon>201606270903505_changedIdentityIcoll.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201607040657188_IsHandIn.cs" />
+    <Compile Include="Migrations\201607040657188_IsHandIn.Designer.cs">
+      <DependentUpon>201607040657188_IsHandIn.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Activity.cs" />
@@ -314,6 +318,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201606270903505_changedIdentityIcoll.resx">
       <DependentUpon>201606270903505_changedIdentityIcoll.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607040657188_IsHandIn.resx">
+      <DependentUpon>201607040657188_IsHandIn.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

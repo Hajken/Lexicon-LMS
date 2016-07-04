@@ -16,11 +16,21 @@ namespace Lexicon_LMS.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Modules
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
-            var modules = db.Modules.Include(m => m.Course);
-           
-            return View(modules.ToList());
+            ApplicationUser CurrentUser = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+            if (User.IsInRole("Teacher"))
+            {
+                var modules = db.Modules.Where(a => a.CourseId == id);
+                return View(modules.ToList());
+               
+            }
+            else
+            {
+                var modules = db.Modules.Where(m => m.CourseId == CurrentUser.CourseId);
+                return View(modules.ToList());
+            }
+            
         }
 
         // GET: Modules/Details/5
@@ -40,17 +50,36 @@ namespace Lexicon_LMS.Controllers
         // GET: Modules/ModuleDetails/5
         public ActionResult ModuleDocuments(int? id)
         {
+            //ApplicationUser CurrentUser = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+          
+            //var cUserRoleId = CurrentUser.Roles.First().RoleId;
+          
+            //var roleIdTeacher = db.Roles.FirstOrDefault(x => x.Name == "Teacher").Id;
+         
+            //var ModuleDocuments = db.Documents.Where(doc => doc.ModuleId == id && doc.CourseId==doc.Module.CourseId && doc.User.Roles.FirstOrDefault().RoleId == roleIdTeacher);
+            var ModuleDocuments = db.Documents.Where(doc => doc.ModuleId == id &&  doc.IsHandIn==false);
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Module module = db.Modules.Find(id);
-            //Document documents = db.Documents.Find(id);
-            if (module == null)
+
+            if (ModuleDocuments == null)
             {
                 return HttpNotFound();
             }
-            return View(module);
+            return View(ModuleDocuments);
+
+
+            //var ActiveModule = db.Modules.Where(m => m.ModuleId == id).FirstOrDefault();
+            //var roleName = db.Roles.FirstOrDefault(x => x.Id == cUserRoleId).Name;
+            //   var d = db.Modules.Where(u => u.Documents.FirstOrDefault().User.Roles.FirstOrDefault().RoleId==roleIdTeacher);
+            //var courseDocument = db.Documents.Where(u => u.CourseId == ActiveModule.CourseId && u.User.Roles.FirstOrDefault().RoleId == roleIdTeacher);
+            //   Module module = db.Modules.Find(id);
+            //Document documents = db.Documents.Find(id);
+
+
+
         }
 
         // GET: Modules/Create

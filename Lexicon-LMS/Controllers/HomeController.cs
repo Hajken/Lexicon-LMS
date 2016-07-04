@@ -5,6 +5,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Lexicon_LMS.Models;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity;
 
 namespace Lexicon_LMS.Controllers
 {
@@ -12,6 +14,7 @@ namespace Lexicon_LMS.Controllers
     public class HomeController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+       
 
         public ActionResult Index()
         {
@@ -35,10 +38,40 @@ namespace Lexicon_LMS.Controllers
             }
             return RedirectToAction("Index");
         }
-        public ActionResult Documents()
+        public ActionResult Documents(int? id)
         {
+            //var userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+
+            //ApplicationUser CurrentUser = userManager.FindById(User.Identity.GetUserId()); // db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+            //var cUserRoleId = CurrentUser.Roles.First().RoleId;
+
+            //    .Where(doc => doc.IsPublic)
+            //    .Where(doc=>doc.User.Roles.FirstOrDefault().RoleId == roleIdTeacher && doc.CourseId==CurrentUser.CourseId);
+
+            //if (User.IsInRole("Teacher")) { var courseDocument = db.Documents.Where(doc => doc.User.Roles.FirstOrDefault().RoleId == roleIdTeacher && doc.CourseId ==doc.Course.CourseId); }
+
+           ApplicationUser CurrentUser = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+           var roleIdTeacher = db.Roles.FirstOrDefault(x =>x.Name == "Teacher").Id;
             
-            return View(db.Documents.ToList());
+            if (User.IsInRole("Teacher"))
+            {
+               var  courseDocument = db.Documents.Where(doc => doc.IsHandIn==false && doc.CourseId ==id);
+                return View(courseDocument);
+            }
+
+            else
+            {
+                var courseDocument = db.Documents.Where(doc => doc.User.Roles.FirstOrDefault().RoleId == roleIdTeacher && doc.CourseId == CurrentUser.CourseId);
+                return View(courseDocument);
+            }
+         
+
+           
+
+
+
+
+           
         }
         public ActionResult About()
         {

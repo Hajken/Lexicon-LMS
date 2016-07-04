@@ -17,7 +17,7 @@ namespace Lexicon_LMS.Models
         public string Description { get; set; }
         public DateTime Created { get; set; }
 
-        
+        public bool IsHandIn { get; set; }
         public string UserId { get; set; }
         public int? ActivityId { get; set; }
         public int? CourseId { get; set; }

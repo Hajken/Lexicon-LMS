@@ -1,5 +1,5 @@
-﻿@model Lexicon_LMS.Models.Module
-@*@model IEnumerable<Lexicon_LMS.Models.Module>*@
+﻿@*@model Lexicon_LMS.Models.Module*@
+@model IEnumerable<Lexicon_LMS.Models.Document>
 
 @{
     ViewBag.Title = "Details";
@@ -9,14 +9,14 @@
 <table class="table table-bordered table-hover">
    
     <tr class="success">
-        <th>@Html.DisplayNameFor(modelItem => modelItem.Documents.First().FileName)</th>
-        <th>@Html.DisplayNameFor(modelItem => modelItem.Documents.First().Description)</th>
-        <th>@Html.DisplayNameFor(modelItem => modelItem.Documents.First().Created)</th>
+        <th>@Html.DisplayNameFor(modelItem => modelItem.FileName)</th>
+        <th>@Html.DisplayNameFor(modelItem => modelItem.Description)</th>
+        <th>@Html.DisplayNameFor(modelItem => modelItem.Created)</th>
         
 
     </tr>
    
-        @foreach (var item in Model.Documents)
+        @foreach (var item in Model)
         {
             <tr class="success">
               

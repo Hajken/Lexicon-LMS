@@ -29,7 +29,7 @@
 
     @foreach (var item in Model)
     {
-        if (item.ActivityType.Name != "Inlämningsuppgift" && DateTime.Now.CompareTo(item.Deadline) < 0)
+        if (DateTime.Now.CompareTo(item.Deadline) < 0)
         {
 
 
