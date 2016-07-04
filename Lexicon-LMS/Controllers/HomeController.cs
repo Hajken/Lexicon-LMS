@@ -22,7 +22,7 @@ namespace Lexicon_LMS.Controllers
             {
                 return RedirectToAction("Index", "Courses");
             }
-            else
+            else 
             {
             var activities = db.Activities.Include(a => a.ActivityType).Include(a => a.Module);
             List<Activity> SortedList = activities.ToList().OrderBy(o => o.StartDate).ToList();
