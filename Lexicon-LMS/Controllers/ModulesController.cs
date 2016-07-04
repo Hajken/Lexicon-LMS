@@ -57,6 +57,7 @@ namespace Lexicon_LMS.Controllers
             //var roleIdTeacher = db.Roles.FirstOrDefault(x => x.Name == "Teacher").Id;
          
             //var ModuleDocuments = db.Documents.Where(doc => doc.ModuleId == id && doc.CourseId==doc.Module.CourseId && doc.User.Roles.FirstOrDefault().RoleId == roleIdTeacher);
+
             var ModuleDocuments = db.Documents.Where(doc => doc.ModuleId == id &&  doc.IsHandIn==false);
 
             if (id == null)
