@@ -23,14 +23,14 @@ namespace Lexicon_LMS.Controllers
             {
                 var modules = db.Modules.Where(a => a.CourseId == id);
                 return View(modules.ToList());
-               
+           
             }
             else
             {
                 var modules = db.Modules.Where(m => m.CourseId == CurrentUser.CourseId);
-                return View(modules.ToList());
-            }
-            
+            return View(modules.ToList());
+        }
+
         }
 
         // GET: Modules/Details/5

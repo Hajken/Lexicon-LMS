@@ -14,13 +14,20 @@ namespace Lexicon_LMS.Controllers
     public class HomeController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-       
 
         public ActionResult Index()
         {
+
+            if (User.IsInRole("Teacher"))
+            {
+                return RedirectToAction("Index", "Courses");
+            }
+            else
+            {
             var activities = db.Activities.Include(a => a.ActivityType).Include(a => a.Module);
             List<Activity> SortedList = activities.ToList().OrderBy(o => o.StartDate).ToList();
             return View(SortedList);
+        }
         }
 
         public ActionResult GetExerciseToSubmit()
@@ -60,7 +67,7 @@ namespace Lexicon_LMS.Controllers
             }
 
             else
-            {
+        {
                 var courseDocument = db.Documents.Where(doc => doc.User.Roles.FirstOrDefault().RoleId == roleIdTeacher && doc.CourseId == CurrentUser.CourseId);
                 return View(courseDocument);
             }
@@ -68,7 +75,7 @@ namespace Lexicon_LMS.Controllers
 
            
 
-
+            
 
 
            

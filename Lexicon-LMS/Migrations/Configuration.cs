@@ -11,7 +11,7 @@ namespace Lexicon_LMS.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(Lexicon_LMS.Models.ApplicationDbContext context)
@@ -98,13 +98,19 @@ namespace Lexicon_LMS.Migrations
             if (!context.Documents.Any(d => d.FileName == "Övning11_Helen"))
             {
                 context.Documents.AddOrUpdate(d => d.FileName,
-                new Document { FileName = "Övning11_Helen", Description = "Helens inlämningsuppgift 11", ActivityId = 5, UserId = (context.Users.FirstOrDefault(u => u.UserName == "helenmagnusson@hotmail.com").Id), Path = "c:/Documents", Created = new DateTime(2016, 6, 12) });
+                new Document { FileName = "Övning11_Helen", Description = "Helens inlämningsuppgift 11", ActivityId = 5, UserId = (context.Users.FirstOrDefault(u => u.UserName == "helenmagnusson@hotmail.com").Id), Path = "c:/Documents", Created = new DateTime(2016, 6, 12), IsHandIn=true });
             }
             if (!context.Documents.Any(d => d.FileName == "Övning12_Helen"))
             {
                 context.Documents.AddOrUpdate(d => d.FileName,
-                new Document { FileName = "Övning12_Helen", Description = "Helens inlämningsuppgift 12", ActivityId = 7, UserId = (context.Users.FirstOrDefault(u => u.UserName == "helenmagnusson@hotmail.com").Id), Path = "c:/Documents", Created = new DateTime(2016, 6, 27) });
+                new Document { FileName = "Övning12_Helen", Description = "Helens inlämningsuppgift 12", ActivityId = 7, UserId = (context.Users.FirstOrDefault(u => u.UserName == "helenmagnusson@hotmail.com").Id), Path = "c:/Documents", Created = new DateTime(2016, 7, 1), IsHandIn = true });
             }
+            if (!context.Documents.Any(d => d.FileName == "Övning11"))
+            {
+                context.Documents.AddOrUpdate(d => d.FileName,
+                new Document { FileName = "Övning12", Description = "Inlämningsuppgift 12", ActivityId = 7, UserId = (context.Users.FirstOrDefault(u => u.UserName == "teacher@hotmail.com").Id), Path = "c:/Documents", Created = new DateTime(2016, 7, 1), IsHandIn=false });
+            }
+
             context.SaveChanges();
 
         }

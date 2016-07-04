@@ -79,7 +79,8 @@ namespace Lexicon_LMS.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToAction("LoginRedirect");
+                    //return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -88,6 +89,17 @@ namespace Lexicon_LMS.Controllers
                 default:
                     ModelState.AddModelError("", "Invalid login attempt.");
                     return View(model);
+            }
+        }
+        public ActionResult LoginRedirect()
+        {
+            if (User.IsInRole("Teacher"))
+            {
+                return RedirectToAction("Index", "Courses");
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
             }
         }
 
@@ -346,6 +358,8 @@ namespace Lexicon_LMS.Controllers
                     return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
             }
         }
+
+
 
         //
         // POST: /Account/ExternalLoginConfirmation
