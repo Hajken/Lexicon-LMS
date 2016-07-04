@@ -42,8 +42,17 @@
                 <p><a href="#">Link</a></p>
             </div>
             <div class="col-sm-8">
+                @Html.ActionLink("Home", "Index", "Home")
+                @if (ViewContext.RouteData.Values["controller"].ToString() != "Home")
+                {
+                    @:> @Html.ActionLink(ViewContext.RouteData.Values["controller"].ToString(), "Index", ViewContext.RouteData.Values["controller"].ToString())
+}
+                @if (ViewContext.RouteData.Values["action"].ToString() != "Index")
+                {
+                    @:> @Html.ActionLink(ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["controller"].ToString())
+}
                 @RenderBody()
-        </div>
+            </div>
             <div id="rightsidebartop" class="col-sm-2 sidenav">
 
                 </div>
