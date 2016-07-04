@@ -15,9 +15,17 @@ namespace Lexicon_LMS.Controllers
 
         public ActionResult Index()
         {
-            var activities = db.Activities.Include(a => a.ActivityType).Include(a => a.Module);
-            List<Activity> SortedList = activities.ToList().OrderBy(o => o.StartDate).ToList();
-            return View(SortedList);
+
+            if (User.IsInRole("Teacher"))
+            {
+                return RedirectToAction("Index", "Courses");
+            }
+            else
+            {
+                var activities = db.Activities.Include(a => a.ActivityType).Include(a => a.Module);
+                List<Activity> SortedList = activities.ToList().OrderBy(o => o.StartDate).ToList();
+                return View(SortedList);
+            }
         }
 
         public ActionResult GetExerciseToSubmit()
@@ -37,7 +45,7 @@ namespace Lexicon_LMS.Controllers
         }
         public ActionResult Documents()
         {
-            
+
             return View(db.Documents.ToList());
         }
         public ActionResult About()

@@ -21,7 +21,7 @@ namespace Lexicon_LMS.Controllers
         {
             string uId = User.Identity.GetUserId();
             var currentUser = db.Users.Include(a => a.Course).FirstOrDefault(u => u.Id == uId);
-            var applicationUsers = db.Users.Include(a => a.Course).Where(u=> u.CourseId== currentUser.CourseId);
+            var applicationUsers = db.Users.Where(u=> u.CourseId== currentUser.CourseId);
             return View(applicationUsers.ToList());
         }
 

@@ -10,129 +10,108 @@ using Lexicon_LMS.Models;
 
 namespace Lexicon_LMS.Controllers
 {
-    [Authorize]
-    public class ModulesController : Controller
+    [Authorize(Roles = "Teacher")]
+    public class CoursesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Modules
-        public ActionResult Index(int id)
+        // GET: Courses
+        public ActionResult Index()
         {
-            var modules = db.Modules.Include(m => m.Course).Where(m => m.CourseId == id);
-           
-            return View(modules.ToList());
+            return View(db.Courses.ToList());
         }
 
-        // GET: Modules/Details/5
+        // GET: Courses/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Module module = db.Modules.Find(id);
-            if (module == null)
+            Course course = db.Courses.Find(id);
+            if (course == null)
             {
                 return HttpNotFound();
             }
-            return View(module);
-        }
-        // GET: Modules/ModuleDetails/5
-        public ActionResult ModuleDocuments(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Module module = db.Modules.Find(id);
-            //Document documents = db.Documents.Find(id);
-            if (module == null)
-            {
-                return HttpNotFound();
-            }
-            return View(module);
+            return View(course);
         }
 
-        // GET: Modules/Create
+        // GET: Courses/Create
         public ActionResult Create()
         {
-            ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "Name");
             return View();
         }
 
-        // POST: Modules/Create
+        // POST: Courses/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ModuleId,Name,Description,StartDate,EndDate,CourseId")] Module module)
+        public ActionResult Create([Bind(Include = "CourseId,Name,Description,StartDate,EndDate")] Course course)
         {
             if (ModelState.IsValid)
             {
-                db.Modules.Add(module);
+                db.Courses.Add(course);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "Name", module.CourseId);
-            return View(module);
+            return View(course);
         }
 
-        // GET: Modules/Edit/5
+        // GET: Courses/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Module module = db.Modules.Find(id);
-            if (module == null)
+            Course course = db.Courses.Find(id);
+            if (course == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "Name", module.CourseId);
-            return View(module);
+            return View(course);
         }
 
-        // POST: Modules/Edit/5
+        // POST: Courses/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ModuleId,Name,Description,StartDate,EndDate,CourseId")] Module module)
+        public ActionResult Edit([Bind(Include = "CourseId,Name,Description,StartDate,EndDate")] Course course)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(module).State = EntityState.Modified;
+                db.Entry(course).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "Name", module.CourseId);
-            return View(module);
+            return View(course);
         }
 
-        // GET: Modules/Delete/5
+        // GET: Courses/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Module module = db.Modules.Find(id);
-            if (module == null)
+            Course course = db.Courses.Find(id);
+            if (course == null)
             {
                 return HttpNotFound();
             }
-            return View(module);
+            return View(course);
         }
 
-        // POST: Modules/Delete/5
+        // POST: Courses/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Module module = db.Modules.Find(id);
-            db.Modules.Remove(module);
+            Course course = db.Courses.Find(id);
+            db.Courses.Remove(course);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
