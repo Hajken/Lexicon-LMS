@@ -55,7 +55,7 @@ namespace Lexicon_LMS.Controllers
             
             if (User.IsInRole("Teacher"))
             {
-               var  courseDocument = db.Documents.Where(doc => doc.IsHandIn==false && doc.CourseId ==id);
+               var  courseDocument = db.Documents.Where(doc => doc.IsHandIn==false && doc.CourseId ==id &&doc.CourseId!=null);
                 return View(courseDocument);
             }
 
