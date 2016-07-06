@@ -57,7 +57,7 @@ namespace Lexicon_LMS.Controllers
 
             //if (User.IsInRole("Teacher")) { var courseDocument = db.Documents.Where(doc => doc.User.Roles.FirstOrDefault().RoleId == roleIdTeacher && doc.CourseId ==doc.Course.CourseId); }
 
-           ApplicationUser CurrentUser = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+           ApplicationUser currentUser = db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
            var roleIdTeacher = db.Roles.FirstOrDefault(x =>x.Name == "Teacher").Id;
             
             if (User.IsInRole("Teacher"))
@@ -68,7 +68,7 @@ namespace Lexicon_LMS.Controllers
 
             else
         {
-                var courseDocument = db.Documents.Where(doc => doc.User.Roles.FirstOrDefault().RoleId == roleIdTeacher && doc.CourseId == CurrentUser.CourseId);
+                var courseDocument = db.Documents.Where(doc => doc.User.Roles.FirstOrDefault().RoleId == roleIdTeacher && doc.CourseId == currentUser.CourseId);
                 return View(courseDocument);
             }
          

@@ -24,7 +24,14 @@
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    @if (User.IsInRole("Teacher"))
+                    {
+                        <li>@Html.ActionLink("Courses", "Index", "Home")</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Schedule", "Index", "Home")</li>
+                    }
                     <li>@Html.ActionLink("Module", "Index", "Modules")</li>
                     <li>@Html.ActionLink("Students", "Index", "ApplicationUsers")</li>
                     <li>@Html.ActionLink("Document", "Documents", "Home")</li>
