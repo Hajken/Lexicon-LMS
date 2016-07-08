@@ -24,7 +24,8 @@ namespace Lexicon_LMS.Migrations
                 new ActivityType { Name = "Inlämningsuppgift" });
             context.SaveChanges();
             context.Courses.AddOrUpdate(c => c.Name,
-                new Course { Name = ".Net", Description = ".Net VT 2016", StartDate = new DateTime(2016, 3, 7), EndDate = new DateTime(2016, 7, 15) });
+                new Course { Name = ".Net", Description = ".Net VT 2016", StartDate = new DateTime(2016, 3, 7), EndDate = new DateTime(2016, 7, 15) },
+                new Course { Name = ".Net", Description = "Java VT 2016", StartDate = new DateTime(2016, 4, 7), EndDate = new DateTime(2016, 8, 15) });
             context.SaveChanges();
             context.Modules.AddOrUpdate(m => m.Name,
                new Module { Name = "C#", Description = "C# programmering Visual Studio", StartDate = new DateTime(2016, 3, 14), EndDate = new DateTime(2016, 4, 15), CourseId = 1 },

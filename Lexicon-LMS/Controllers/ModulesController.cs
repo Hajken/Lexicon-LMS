@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Lexicon_LMS.Models;
+using Microsoft.AspNet.Identity.Owin;
+using System.Threading.Tasks;
 
 namespace Lexicon_LMS.Controllers
 {
@@ -14,24 +16,21 @@ namespace Lexicon_LMS.Controllers
     public class ModulesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        ApplicationUserManager UserManager => HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
 
         // GET: Modules
-        public ActionResult Index(int? id)
+        public async Task<ActionResult> Index(int? id)
         {
-            ApplicationUser CurrentUser = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
-            if (User.IsInRole("Teacher"))
-            {
-                var modules = db.Modules.Where(a => a.CourseId == id);
-                return View(modules.ToList());
-           
-            }
-            else
-            {
-                var modules = db.Modules.Where(m => m.CourseId == CurrentUser.CourseId);
-            return View(modules.ToList());
-        }
+            var CurrentUser = await UserManager.FindByNameAsync(User.Identity.Name);
+            
+            int? courseId = User.IsInRole("Teacher") ? id : CurrentUser.CourseId;
+            var modules = db.Modules.Where(a => a.CourseId == courseId);
 
-        }
+            ViewBag.BreadCrumbs = Url.BreadCrumb(db.Courses.Find(courseId));
+
+            return View(modules.ToList());
+
+         }
 
         // GET: Modules/Details/5
         public ActionResult Details(int? id)
@@ -51,14 +50,14 @@ namespace Lexicon_LMS.Controllers
         public ActionResult ModuleDocuments(int? id)
         {
             //ApplicationUser CurrentUser = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
-          
+
             //var cUserRoleId = CurrentUser.Roles.First().RoleId;
-          
+
             //var roleIdTeacher = db.Roles.FirstOrDefault(x => x.Name == "Teacher").Id;
-         
+
             //var ModuleDocuments = db.Documents.Where(doc => doc.ModuleId == id && doc.CourseId==doc.Module.CourseId && doc.User.Roles.FirstOrDefault().RoleId == roleIdTeacher);
 
-            var ModuleDocuments = db.Documents.Where(doc => doc.ModuleId == id &&  doc.IsHandIn==false);
+            var ModuleDocuments = db.Documents.Where(doc => doc.ModuleId == id && doc.IsHandIn == false);
 
             if (id == null)
             {

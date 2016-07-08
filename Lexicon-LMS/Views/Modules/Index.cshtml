@@ -30,8 +30,13 @@
        
         <td>
            @* @Html.DisplayFor(modelItem => item.Name)*@
-            @Html.ActionLink(item.Name,"Details",new {id=item.ModuleId },new {@class="btn btn-success" })
-           
+            @*@Html.ActionLink(item.Name,"Details",new {id=item.ModuleId },new {@class="btn btn-success" })*@
+            @Html.ActionLink(item.Name, "Index", "Activities", new { id = item.ModuleId }, new { @class = "btn btn-success" })
+          @{
+               ViewBag.ModuleNamn = item.Name;
+        }
+
+
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Description)

@@ -6,7 +6,9 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.WebPages;
 using Lexicon_LMS.Models;
+using System.IO;
 
 namespace Lexicon_LMS.Controllers
 {
@@ -14,10 +16,19 @@ namespace Lexicon_LMS.Controllers
     public class CoursesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
+        //private HtmlHelper Html 
+        //    => new HtmlHelper<object>(
+        //        new ViewContext(ControllerContext,
+        //            new WebFormView(ControllerContext, "omg"),
+        //            new ViewDataDictionary(),
+        //            new TempDataDictionary(),
+        //            new StringWriter()),
+        //        new ViewPage());
+           
         // GET: Courses
         public ActionResult Index()
         {
+            ViewBag.BreadCrumbs = Url.BreadCrumb("Courses Overview");
             return View(db.Courses.ToList());
         }
 
@@ -29,6 +40,7 @@ namespace Lexicon_LMS.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Course course = db.Courses.Find(id);
+            ViewBag.BreadCrumbs = Url.BreadCrumb(course);
             if (course == null)
             {
                 return HttpNotFound();
