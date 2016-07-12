@@ -17,24 +17,29 @@ namespace Lexicon_LMS
             var link = url.RouteUrl(new { controller, action, id });
             return $"<a href=\"{link}\">{controller}: {name}</a>";
         }
-
+        //public static string BreadCrumb(this UrlHelper url, Document entity)
+        //{
+        //    var breadcrumb = url.BreadCrumb(entity.Module);
+        //    breadcrumb += " > " + url.Linkify(entity.FileName, "Documents", "Index", entity.ModuleId);
+        //    return breadcrumb.ToString();
+        //}
         public static string BreadCrumb(this UrlHelper url, Activity entity)
         {
             var breadcrumb = url.BreadCrumb(entity.Module);
-            breadcrumb += " > " + url.Linkify(entity.Name, "Activity", "Details", entity.ActivityId);
+            breadcrumb += " > " + url.Linkify(entity.Name, "Activities", "Index", entity.ModuleId);
             return breadcrumb.ToString();
         }
 
         public static string BreadCrumb(this UrlHelper url, Module entity)
         {
             var breadcrumb = url.BreadCrumb(entity.Course);
-            breadcrumb += " > " + url.Linkify(entity.Name, "Module", "Details", entity.ModuleId);
+            breadcrumb += " > " + url.Linkify(entity.Name, "Modules", "Index", entity.CourseId);
             return breadcrumb.ToString();
         }
 
         public static string BreadCrumb(this UrlHelper url, Course entity)
         {
-            var breadcrumb = url.Linkify(entity.Name, "Course", "Details", entity.CourseId);
+            var breadcrumb = url.Linkify(entity.Name, "Courses", "Index", entity.CourseId);
             return breadcrumb.ToString();
         }
 

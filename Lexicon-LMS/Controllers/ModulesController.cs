@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Lexicon_LMS.Models;
 using Microsoft.AspNet.Identity.Owin;
 using System.Threading.Tasks;
+using Lexicon_LMS;
 
 namespace Lexicon_LMS.Controllers
 {
@@ -68,6 +69,8 @@ namespace Lexicon_LMS.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.BreadCrumbs = Url.BreadCrumb(db.Modules.Find(id));
+
             return View(ModuleDocuments);
 
 
