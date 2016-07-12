@@ -3,14 +3,20 @@
 @{
     ViewBag.Title = "Index";
 }
+@if (User.IsInRole("Teacher"))
+{<h2>Courses</h2> }
+else
+{
+    <h2>Course Overview</h2>
+}
 
-<h2>Courses</h2>
-
+@if (User.IsInRole("Teacher")) { 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
+}
+<table class="table table-bordered">
+    <tr class="success">
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
@@ -23,16 +29,21 @@
         <th>
             @Html.DisplayNameFor(model => model.EndDate)
         </th>
-        <th></th>
+        @if (User.IsInRole("Teacher"))
+        {
+            <th></th>
+            <th></th>
+        }
+       
     </tr>
 
     @foreach (var item in Model)
     {
-        <tr>
+        <tr class="success">
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
-            <td>
+            <td class="col-md-5">
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
@@ -41,14 +52,18 @@
             <td>
                 @Html.DisplayFor(modelItem => item.EndDate)
             </td>
+            @if (User.IsInRole("Teacher")) { 
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.CourseId }) |
                 @Html.ActionLink("Details", "Details", new { id = item.CourseId }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.CourseId })
-            </td>            <td>
-                @Html.ActionLink("Modules", "Index","Modules", new { id = item.CourseId }, new { @class = "btn btn-success" })
+            </td>  
+                
+              <td>
+                @Html.ActionLink("Modules", "Index","Modules", new { courseId = item.CourseId }, new { @class = "btn btn-success" })
             </td>
-
+            }
+            
         </tr>
     }
 

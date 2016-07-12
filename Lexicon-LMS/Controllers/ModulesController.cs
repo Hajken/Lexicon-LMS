@@ -16,18 +16,19 @@ namespace Lexicon_LMS.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Modules
-        public ActionResult Index(int? id)
+        public ActionResult Index(int? courseId)
         {
             ApplicationUser CurrentUser = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
             if (User.IsInRole("Teacher"))
             {
-                var modules = db.Modules.Where(a => a.CourseId == id);
+                var modules = db.Modules.Where(a => a.CourseId == courseId);
+                ViewBag.CourseId = courseId;
                 return View(modules.ToList());
            
             }
             else
             {
-                var modules = db.Modules.Where(m => m.CourseId == CurrentUser.CourseId);
+            var modules = db.Modules.Where(m => m.CourseId == CurrentUser.CourseId);
             return View(modules.ToList());
         }
 
@@ -59,6 +60,7 @@ namespace Lexicon_LMS.Controllers
             //var ModuleDocuments = db.Documents.Where(doc => doc.ModuleId == id && doc.CourseId==doc.Module.CourseId && doc.User.Roles.FirstOrDefault().RoleId == roleIdTeacher);
 
             var ModuleDocuments = db.Documents.Where(doc => doc.ModuleId == id &&  doc.IsHandIn==false);
+            ViewBag.ModId = db.Modules.FirstOrDefault(x => x.ModuleId == id).CourseId;
 
             if (id == null)
             {
@@ -69,7 +71,7 @@ namespace Lexicon_LMS.Controllers
             {
                 return HttpNotFound();
             }
-            return View(ModuleDocuments);
+            return View(ModuleDocuments.ToList());
 
 
             //var ActiveModule = db.Modules.Where(m => m.ModuleId == id).FirstOrDefault();
@@ -84,9 +86,12 @@ namespace Lexicon_LMS.Controllers
         }
 
         // GET: Modules/Create
-        public ActionResult Create()
+        public ActionResult Create(int courseId)
         {
-            ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "Name");
+            ViewBag.CourseId = courseId; // new SelectList(db.Courses, "CourseId", "Name", id);
+            ViewBag.CourseName = db.Courses.FirstOrDefault(x => x.CourseId == courseId)?.Name;
+            ViewBag.CId = courseId;
+        
             return View();
         }
 
@@ -97,11 +102,12 @@ namespace Lexicon_LMS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ModuleId,Name,Description,StartDate,EndDate,CourseId")] Module module)
         {
+            
             if (ModelState.IsValid)
             {
                 db.Modules.Add(module);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { courseId=module.CourseId});
             }
 
             ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "Name", module.CourseId);
@@ -116,11 +122,14 @@ namespace Lexicon_LMS.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Module module = db.Modules.Find(id);
+           
             if (module == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "Name", module.CourseId);
+            ViewBag.CourseId = module.CourseId; 
+            ViewBag.CourseName = db.Courses.FirstOrDefault(x=>x.CourseId==module.CourseId).Name;
+            // ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "Name",module.CourseId);
             return View(module);
         }
 
@@ -135,7 +144,7 @@ namespace Lexicon_LMS.Controllers
             {
                 db.Entry(module).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { courseId = module.CourseId } );
             }
             ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "Name", module.CourseId);
             return View(module);
@@ -164,7 +173,7 @@ namespace Lexicon_LMS.Controllers
             Module module = db.Modules.Find(id);
             db.Modules.Remove(module);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id=module.CourseId});
         }
 
         protected override void Dispose(bool disposing)

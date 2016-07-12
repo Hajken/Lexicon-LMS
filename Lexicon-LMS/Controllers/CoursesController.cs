@@ -10,7 +10,7 @@ using Lexicon_LMS.Models;
 
 namespace Lexicon_LMS.Controllers
 {
-    [Authorize(Roles = "Teacher")]
+    //[Authorize(Roles = "Teacher")]
     public class CoursesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -18,7 +18,16 @@ namespace Lexicon_LMS.Controllers
         // GET: Courses
         public ActionResult Index()
         {
+            ApplicationUser CurrentUser = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+            if (User.IsInRole("Teacher")) { 
             return View(db.Courses.ToList());
+            }
+            else
+            {
+                var course = db.Courses.Where(m => m.CourseId == CurrentUser.CourseId);
+                return View(course.ToList());
+            }
+
         }
 
         // GET: Courses/Details/5

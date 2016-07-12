@@ -1,4 +1,6 @@
-﻿@model IEnumerable<Lexicon_LMS.Models.Activity>
+﻿@using PagedList.Mvc;
+@using PagedList;
+@model IPagedList<Lexicon_LMS.Models.Activity>
 
 @{
     ViewBag.Title = "Schedule";
@@ -7,32 +9,32 @@
 <table class="table table-bordered table-hover">
     <tr class="success">
         <th>
-            @Html.DisplayNameFor(model => model.ActivityType.Name)
+            @Html.DisplayNameFor(model => model.First().ActivityType.Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Module.Name)
+            @Html.DisplayNameFor(model => model.First().Module.Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.DisplayNameFor(model => model.First().Description)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.First().Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.StartDate)
+            @Html.DisplayNameFor(model => model.First().StartDate)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Deadline)
+            @Html.DisplayNameFor(model => model.First().Deadline)
         </th>
         <th> </th>
     </tr>
 
     @foreach (var item in Model)
     {
-        if (DateTime.Now.CompareTo(item.Deadline) < 0)
+        if (true@*DateTime.Now.CompareTo(item.Deadline) < 0*@)
         {
-
-            <tr class="success">
+            //string style = item.StartDate== DateTime.Now ? "background-color:Red" : null;
+            <tr style="@(item.StartDate.Date==DateTime.Now.Date ? "Background-color:#AB8DB8" : "")">
             <td>
                 @Html.DisplayFor(modelItem => item.ActivityType.Name)
             </td>
@@ -59,4 +61,4 @@
     }
 
 </table>
-
+@Html.PagedListPager(Model, page => Url.Action("Index", new {page}),new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true, DisplayItemSliceAndTotal = true })

@@ -25,9 +25,13 @@
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Module", "Index", "Modules")</li>
+                         @if (User.IsInRole("Pupil"))
+                          {
+                             <li>@Html.ActionLink("Course","Index","Courses")</li>
+                          <li>@Html.ActionLink("Module", "Index", "Modules")</li>
+                          }
                     <li>@Html.ActionLink("Students", "Index", "ApplicationUsers")</li>
-                    <li>@Html.ActionLink("Document", "Documents", "Home")</li>
+                    <li>@Html.ActionLink("Course Document", "Documents", "Home")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

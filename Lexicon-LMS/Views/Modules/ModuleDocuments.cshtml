@@ -3,6 +3,7 @@
 
 @{
     ViewBag.Title = "Details";
+    //ViewBag.ModId = ViewBag.ModId;
 }
 
 <h2>Module Documents</h2>
@@ -64,5 +65,6 @@
 </div>*@
 <p>
     @*@Html.ActionLink("Edit", "Edit", new { id = Model.ModuleId }) |*@
-    @Html.ActionLink("Back to List", "Index")
+  @*  @Html.ActionLink("Back to List", "Index","Modules",new { id=ViewBag.ModId},null)*@
+    @Html.ActionLink("Back to List", "Index", "Modules",new{id= ViewBag.ModId },null)
 </p>

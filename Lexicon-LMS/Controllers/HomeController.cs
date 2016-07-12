@@ -7,6 +7,8 @@ using System.Web.Mvc;
 using Lexicon_LMS.Models;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity;
+using PagedList;
+using PagedList.Mvc;
 
 namespace Lexicon_LMS.Controllers
 {
@@ -15,18 +17,38 @@ namespace Lexicon_LMS.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-
+            int pageSize = 5;
             if (User.IsInRole("Teacher"))
             {
                 return RedirectToAction("Index", "Courses");
             }
             else 
             {
-            var activities = db.Activities.Include(a => a.ActivityType).Include(a => a.Module);
-            List<Activity> SortedList = activities.ToList().OrderBy(o => o.StartDate).ToList();
-            return View(SortedList);
+               
+                var activities = db.Activities.Include(a => a.ActivityType).Include(a => a.Module);
+                List<Activity> SortedList = activities.ToList().OrderBy(o => o.StartDate).ToList();
+                ViewBag.Count = SortedList.Count();
+                ViewBag.C = SortedList.Where(x => x.StartDate.Date == DateTime.Now.Date).Count();
+
+
+                int indexOfTodaysActivity = SortedList.FindIndex(c => c.StartDate.Date == DateTime.Now.Date);
+               
+                int? pageSchedule = page;
+                if (pageSchedule==null)
+                {
+                    page = (indexOfTodaysActivity / pageSize) + 1;
+                    return View(SortedList.ToPagedList(page ?? 1, pageSize));
+                   
+                }
+                else
+                {
+                   
+                    return View(SortedList.ToPagedList(page ?? 1, pageSize));
+                }
+                 
+                
         }
         }
 
