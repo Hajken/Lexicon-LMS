@@ -15,11 +15,21 @@ namespace Lexicon_LMS.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        //// GET: Activities
+        //public ActionResult Index()
+        //{
+        //    var activities = db.Activities.Include(a => a.ActivityType).Include(a => a.Module);
+        //    return View(activities.ToList());
+
+
+        //}
         // GET: Activities
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
-            var activities = db.Activities.Include(a => a.ActivityType).Include(a => a.Module);
+            var activities = db.Activities.Where(a => a.ModuleId == id).Include(a => a.ActivityType).Include(a => a.Module);
+            ViewBag.BreadCrumbs = Url.BreadCrumb(db.Modules.Find(id));
             return View(activities.ToList());
+
         }
 
         // GET: Activities/Details/5
@@ -30,6 +40,8 @@ namespace Lexicon_LMS.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Activity activity = db.Activities.Find(id);
+            ViewBag.BreadCrumbs = Url.BreadCrumb(activity);
+
             if (activity == null)
             {
                 return HttpNotFound();
@@ -50,7 +62,7 @@ namespace Lexicon_LMS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ActivityId,Description,Name,StartTime,Deadline,ActivityTypeId,ModuleId")] Activity activity)
+        public ActionResult Create([Bind(Include = "ActivityId,Description,Name,StartDate,Deadline,ActivityTypeId,ModuleId")] Activity activity)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +98,7 @@ namespace Lexicon_LMS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ActivityId,Description,Name,StartTime,Deadline,ActivityTypeId,ModuleId")] Activity activity)
+        public ActionResult Edit([Bind(Include = "ActivityId,Description,Name,StartDate,Deadline,ActivityTypeId,ModuleId")] Activity activity)
         {
             if (ModelState.IsValid)
             {

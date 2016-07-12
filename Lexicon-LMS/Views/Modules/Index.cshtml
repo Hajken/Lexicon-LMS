@@ -7,7 +7,7 @@
 
 <h2>Modules</h2>
 
-    
+
         
             @if (User.IsInRole("Teacher"))
             {
@@ -21,7 +21,7 @@
 
 <table class="table table-bordered table-hover">
     <tr class="success">
-
+       
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
@@ -43,22 +43,28 @@
 
     @foreach(var item in Model)
         {
-        <tr class="success">
-
+    <tr class="success">
+       
         <td>
-            @* @Html.DisplayFor(modelItem => item.Name)*@
-            @Html.ActionLink(item.Name, "Details", new {id = item.ModuleId}, new { @class = "btn btn-success" })
+           @* @Html.DisplayFor(modelItem => item.Name)*@
+            @*@Html.ActionLink(item.Name,"Details",new {id=item.ModuleId },new {@class="btn btn-success" })*@
+            @Html.ActionLink(item.Name, "Index", "Activities", new { id = item.ModuleId }, new { @class = "btn btn-success" })
+          @{
+               ViewBag.ModuleNamn = item.Name;
+        }
 
+           
+           
         </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndDate)
-            </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndDate)
+        </td>
             @if (User.IsInRole("Teacher")) { 
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.ModuleId }) |
@@ -66,16 +72,16 @@
                 @Html.ActionLink("Delete", "Delete", new { id = item.ModuleId })
             </td>
             }
-            <td>
-
+        <td>
+           
                 @Html.ActionLink("Documents", "ModuleDocuments", new { id = item.ModuleId }, new { @class = "btn btn-success" })
 
 
-            </td>
-        </tr>
-    }
+        </td>
+    </tr>
+}
 
-    </table>
+</table>
 @if (User.IsInRole("Teacher")) {
 <p>
    

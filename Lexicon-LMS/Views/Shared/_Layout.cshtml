@@ -46,29 +46,30 @@
                 <p><a href="#">Link</a></p>
             </div>
             <div class="col-sm-8">
-                @Html.ActionLink("Home", "Index", "Home")
-                @if (ViewContext.RouteData.Values["controller"].ToString() != "Home")
-                {
-                    @:> @Html.ActionLink(ViewContext.RouteData.Values["controller"].ToString(), "Index", ViewContext.RouteData.Values["controller"].ToString())
-}
-                @if (ViewContext.RouteData.Values["action"].ToString() != "Index")
-                {
-                    @:> @Html.ActionLink(ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["controller"].ToString())
-}
+                <h3>@Html.Raw(ViewBag.BreadCrumbs)</h3>
+
+                @*@if (ViewContext.RouteData.Values["controller"].ToString() != "Home")
+                                    {
+                                        @:> @Html.ActionLink(ViewContext.RouteData.Values["controller"].ToString(), "Index", ViewContext.RouteData.Values["controller"].ToString())
+                    }
+                                    @if (ViewContext.RouteData.Values["action"].ToString() != "Index")
+                                    {
+                                        @:> @Html.ActionLink(ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["controller"].ToString())
+                    }*@
                 @RenderBody()
             </div>
             <div id="rightsidebartop" class="col-sm-2 sidenav">
 
-                </div>
-                </div>
-                </div>
-          
-            
-       
+            </div>
+        </div>
+    </div>
+
+
+
 
     <footer class="container-fluid text-center">
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+    </footer>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

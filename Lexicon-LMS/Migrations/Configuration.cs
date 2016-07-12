@@ -24,11 +24,14 @@ namespace Lexicon_LMS.Migrations
                 new ActivityType { Name = "Inlämningsuppgift" });
             context.SaveChanges();
             context.Courses.AddOrUpdate(c => c.Name,
-                new Course { Name = ".Net", Description = ".Net VT 2016", StartDate = new DateTime(2016, 3, 7), EndDate = new DateTime(2016, 7, 15) });
+                new Course { Name = ".Net", Description = ".Net VT 2016", StartDate = new DateTime(2016, 3, 7), EndDate = new DateTime(2016, 7, 15) },
+                new Course { Name = ".Net", Description = "Java VT 2016", StartDate = new DateTime(2016, 4, 7), EndDate = new DateTime(2016, 8, 15) });
             context.SaveChanges();
             context.Modules.AddOrUpdate(m => m.Name,
                new Module { Name = "C#", Description = "C# programmering Visual Studio", StartDate = new DateTime(2016, 3, 14), EndDate = new DateTime(2016, 4, 15), CourseId = 1 },
                new Module { Name = "MVC", Description = "MVC programmering Visual Studio", StartDate = new DateTime(2016, 6, 14), EndDate = new DateTime(2016, 7, 15), CourseId = 1 },
+                new Module { Name = "JavaScript Java", Description = "JavaScript Java programmering", StartDate = new DateTime(2016, 6, 14), EndDate = new DateTime(2016, 7, 15), CourseId = 6 },
+               new Module { Name = "Java Module", Description = "Java programmering", StartDate = new DateTime(2016, 7, 16), EndDate = new DateTime(2016, 8, 15), CourseId = 6 }, 
                new Module { Name = "JavaScript", Description = "Javascript programmering Visual Studio", StartDate = new DateTime(2016, 5, 11), EndDate = new DateTime(2016, 5, 25), CourseId = 1 });
             context.SaveChanges();
             context.Activities.AddOrUpdate(a => a.Name,
@@ -98,7 +101,7 @@ namespace Lexicon_LMS.Migrations
             if (!context.Documents.Any(d => d.FileName == "Övning11_Helen"))
             {
                 context.Documents.AddOrUpdate(d => d.FileName,
-                new Document { FileName = "Övning11_Helen", Description = "Helens inlämningsuppgift 11", ActivityId = 5, UserId = (context.Users.FirstOrDefault(u => u.UserName == "helenmagnusson@hotmail.com").Id), Path = "c:/Documents", Created = new DateTime(2016, 6, 12), IsHandIn=true });
+                new Document { FileName = "Övning11_Helen", Description = "Helens inlämningsuppgift 11", ActivityId = 5, UserId = (context.Users.FirstOrDefault(u => u.UserName == "helenmagnusson@hotmail.com").Id), Path = "c:/Documents", Created = new DateTime(2016, 6, 12), IsHandIn = true });
             }
             if (!context.Documents.Any(d => d.FileName == "Övning12_Helen"))
             {
@@ -108,7 +111,7 @@ namespace Lexicon_LMS.Migrations
             if (!context.Documents.Any(d => d.FileName == "Övning11"))
             {
                 context.Documents.AddOrUpdate(d => d.FileName,
-                new Document { FileName = "Övning12", Description = "Inlämningsuppgift 12", ActivityId = 7, UserId = (context.Users.FirstOrDefault(u => u.UserName == "teacher@hotmail.com").Id), Path = "c:/Documents", Created = new DateTime(2016, 7, 1), IsHandIn=false });
+                new Document { FileName = "Övning12", Description = "Inlämningsuppgift 12", ActivityId = 7, UserId = (context.Users.FirstOrDefault(u => u.UserName == "teacher@hotmail.com").Id), Path = "c:/Documents", Created = new DateTime(2016, 7, 1), IsHandIn = false });
             }
 
             context.SaveChanges();

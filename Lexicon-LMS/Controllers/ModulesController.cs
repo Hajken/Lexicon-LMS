@@ -7,6 +7,9 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Lexicon_LMS.Models;
+using Microsoft.AspNet.Identity.Owin;
+using System.Threading.Tasks;
+using Lexicon_LMS;
 
 namespace Lexicon_LMS.Controllers
 {
@@ -14,23 +17,19 @@ namespace Lexicon_LMS.Controllers
     public class ModulesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        ApplicationUserManager UserManager => HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
 
         // GET: Modules
-        public ActionResult Index(int? courseId)
+        public async Task<ActionResult> Index(int? id)
         {
-            ApplicationUser CurrentUser = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
-            if (User.IsInRole("Teacher"))
-            {
-                var modules = db.Modules.Where(a => a.CourseId == courseId);
-                ViewBag.CourseId = courseId;
-                return View(modules.ToList());
+            var CurrentUser = await UserManager.FindByNameAsync(User.Identity.Name);
+            
+            int? courseId = User.IsInRole("Teacher") ? id : CurrentUser.CourseId;
+            var modules = db.Modules.Where(a => a.CourseId == courseId);
+
+            ViewBag.BreadCrumbs = Url.BreadCrumb(db.Courses.Find(courseId));
            
-            }
-            else
-            {
-            var modules = db.Modules.Where(m => m.CourseId == CurrentUser.CourseId);
             return View(modules.ToList());
-        }
 
         }
 
@@ -71,7 +70,9 @@ namespace Lexicon_LMS.Controllers
             {
                 return HttpNotFound();
             }
-            return View(ModuleDocuments.ToList());
+            ViewBag.BreadCrumbs = Url.BreadCrumb(db.Modules.Find(id));
+
+            return View(ModuleDocuments);
 
 
             //var ActiveModule = db.Modules.Where(m => m.ModuleId == id).FirstOrDefault();

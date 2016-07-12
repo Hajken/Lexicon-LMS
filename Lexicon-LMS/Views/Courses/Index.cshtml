@@ -5,10 +5,10 @@
 }
 @if (User.IsInRole("Teacher"))
 {<h2>Courses</h2> }
-else
+@*else
 {
     <h2>Course Overview</h2>
-}
+}*@
 
 @if (User.IsInRole("Teacher")) { 
 <p>
