@@ -25,6 +25,7 @@ namespace Lexicon_LMS.Controllers
             var CurrentUser = await UserManager.FindByNameAsync(User.Identity.Name);
             
             int? courseId = User.IsInRole("Teacher") ? id : CurrentUser.CourseId;
+            ViewBag.CourseId = courseId;
             var modules = db.Modules.Where(a => a.CourseId == courseId);
 
             ViewBag.BreadCrumbs = Url.BreadCrumb(db.Courses.Find(courseId));
